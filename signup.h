@@ -1,0 +1,33 @@
+#ifndef SIGNUP_H
+#define SIGNUP_H
+
+#include <QMainWindow>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QSqlError>
+#include <QMessageBox>
+
+namespace Ui {
+class signup;
+}
+
+class signup : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit signup(QWidget *parent = nullptr);
+    ~signup();
+
+private slots:
+     void on_signup_button_clicked();
+
+private:
+    Ui::signup *ui;
+
+    bool setupDatabase();
+    bool checkUsername(QString username);    // creates DB and table if not exist
+     bool checkEmail(QString email);
+};
+
+#endif // SIGNUP_H

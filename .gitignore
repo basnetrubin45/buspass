@@ -1,0 +1,26 @@
+# Build folders
+build/
+build-*/
+cmake-build-*/
+
+# CMake cache
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Qt generated
+*.autosave
+moc_*
+ui_*
+qrc_*
+*.pro.user
+
+# Compiled files
+*.o
+*.a
+*.so
+*.exe
+
+# Other
+.DS_Store

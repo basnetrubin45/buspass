@@ -1,4 +1,6 @@
 #include "login.h"
+#include "signup.h"
+
 #include "ui_login.h"
 
 login::login(QWidget *parent)
@@ -71,6 +73,13 @@ void login::on_login_button_clicked()
         QMessageBox::critical(this, "Failed", "Invalid username or password. Try again.");
 
     }
+}
+
+void login::on_signup_button_clicked()
+{
+    signup *s = new signup();
+    s->show();
+    this->close();
 }
 
 login::~login()

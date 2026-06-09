@@ -1,4 +1,6 @@
 #include "signup.h"
+#include "login.h"
+
 #include "ui_signup.h"
 
 signup::signup(QWidget *parent)
@@ -36,23 +38,33 @@ void signup::on_signup_button_clicked()
         return;
     }
 
-    if (checkUsername(username)==0) {
+    if (password.length()<6) {
+        QMessageBox::warning(this, "Warning", "Password length must be atleast 6!");
+        return;
+    }
 
-        if (checkEmail(username)==0) {
-            QMessageBox::information(this, "Success", "Signup successful!");
+        if (checkUsername(username)==0) {
 
-            QSqlQuery query;
-            query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES (:username, :name, :password, :email, 0)");
+            if (checkEmail(username)==0) {
+                QMessageBox::information(this, "Success", "Signup successful!");
 
+                QSqlQuery query;
+                query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES (:username, :name, :password, :email, 0)");
 
-        } else {
+            {
+                login *s = new login();
+                s->show();
+                this->close();
+            }
+
+            } else {
             QMessageBox::critical(this, "Failed", "Invalid email already in use.");
 
         }
-    } else {
-        QMessageBox::critical(this, "Failed", "Invalid username already taken. Try again.");
+            } else {
+            QMessageBox::critical(this, "Failed", "Invalid username already taken. Try again.");
 
-    }
+        }
 }
 
 bool signup::checkUsername(QString username)
@@ -89,6 +101,13 @@ bool signup::checkEmail(QString email)
     }
 
     return n;
+}
+
+void signup::on_login_button_clicked()
+{
+    login *s = new login();
+    s->show();
+    this->close();
 }
 
 signup::~signup()

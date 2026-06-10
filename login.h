@@ -28,7 +28,6 @@ private slots:
 private:
     Ui::login *ui;
 
-    bool setupDatabase();          // creates DB and table if not exist
     bool checkCredentials(QString username, QString password);
 };
 #endif // LOGIN_H

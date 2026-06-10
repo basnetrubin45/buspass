@@ -1,7 +1,9 @@
 #include "login.h"
 #include "signup.h"
-
+#include "session.h"
 #include "ui_login.h"
+#include "mainwindow.h"
+#include"database.h"
 
 login::login(QWidget *parent)
     : QMainWindow(parent)
@@ -9,48 +11,24 @@ login::login(QWidget *parent)
 {
     ui->setupUi(this);
     setWindowTitle("Login");
-
-    if (!setupDatabase()) {
-        QMessageBox::critical(this, "Error", "Could not connect to database!");
-    }
 }
-
-bool login::setupDatabase()
-{
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("buspass.db");
-
-    if (!db.open()) {
-        return false;
-    }
-
-
-  QSqlQuery query;
-    query.exec("CREATE TABLE IF NOT EXISTS user ("
-               "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-               "username TEXT NOT NULL UNIQUE,"
-               "password TEXT NOT NULL CHECK(LENGTH(password) >= 6),"
-               "name TEXT NOT NULL,"
-               "email TEXT UNIQUE,"
-               "isAdmin BOOLEAN NOT NULL"
-               ")");
-
-   //  query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES ('admin', 'admin123', 'admin1', 'admin@example.com', 1)");
-    return true;
-}
-
 
 bool login::checkCredentials(QString username, QString password)
 {
     QSqlQuery query;
 
-    query.bindValue(":username", username);     // security
-    query.bindValue(":password", password);    //security
     query.prepare("SELECT * FROM user WHERE username = :username AND password = :password");
-
+    query.bindValue(":username", username);
+    query.bindValue(":password", password);
     query.exec();
 
     if (query.next()) {
+        int id = query.value(0).toInt();
+        Session::instance().login(id);
+
+        MainWindow *d = new MainWindow();
+        d->show();
+        this->close();
         return true;
     }
 

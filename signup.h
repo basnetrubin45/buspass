@@ -27,9 +27,8 @@ private slots:
 private:
     Ui::signup *ui;
 
-    bool setupDatabase();
-    bool checkUsername(QString username);    // creates DB and table if not exist
-     bool checkEmail(QString email);
+    bool checkUsername(QString username);
+    bool checkEmail(QString email);
 };
 
 #endif // SIGNUP_H

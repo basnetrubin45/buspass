@@ -21,10 +21,12 @@ set(PROJECT_SOURCES
         signup.ui
         signup.h
         signup.cpp
+        mainwindow.ui
+        mainwindow.h
+        mainwindow.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-
 
 qt_add_executable(buspass
         MANUAL_FINALIZATION
@@ -32,6 +34,8 @@ qt_add_executable(buspass
             signup.h
             signup.cpp
             signup.ui
+            session.h
+            database.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET buspass APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

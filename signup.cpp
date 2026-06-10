@@ -9,21 +9,6 @@ signup::signup(QWidget *parent)
 {
     ui->setupUi(this);
 
-    if (!setupDatabase()) {
-        QMessageBox::critical(this, "Error", "Could not connect to database!");
-    }
-}
-
-bool signup::setupDatabase()
-{
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("buspass.db");
-
-    if (!db.open()) {
-        return false;
-    }
-
-    return true;
 }
 
 void signup::on_signup_button_clicked()
@@ -43,36 +28,42 @@ void signup::on_signup_button_clicked()
         return;
     }
 
-        if (checkUsername(username)==0) {
+        if (checkUsername(username)==1) {
+        QMessageBox::critical(this, "Failed", "Invalid username already taken. Try again.");
 
-            if (checkEmail(username)==0) {
+        return;
+        }
+            else if (checkEmail(email)==1) {
+                QMessageBox::critical(this, "Failed", "Invalid email already in use.");
+
+                return;
+            }
+            else{
                 QMessageBox::information(this, "Success", "Signup successful!");
 
                 QSqlQuery query;
-                query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES (:username, :name, :password, :email, 0)");
+                query.prepare("INSERT INTO user (username, password, name, email, isAdmin) VALUES (:username, :password, :name, :email, 0)");
+                query.bindValue(":username", username);
+                query.bindValue(":password", password);
+                query.bindValue(":name", name);
+                query.bindValue(":email", email);
+                query.exec();
 
-            {
+                {
                 login *s = new login();
                 s->show();
                 this->close();
+                }
             }
 
-            } else {
-            QMessageBox::critical(this, "Failed", "Invalid email already in use.");
-
-        }
-            } else {
-            QMessageBox::critical(this, "Failed", "Invalid username already taken. Try again.");
-
-        }
 }
 
 bool signup::checkUsername(QString username)
 {
     QSqlQuery query;
 
-    query.bindValue(":username", username);        //security
     query.prepare("SELECT * FROM user WHERE username = :username");
+    query.bindValue(":username", username);
 
     query.exec();
 
@@ -89,8 +80,8 @@ bool signup::checkEmail(QString email)
 {
     QSqlQuery query;
 
-    query.bindValue(":email", email);        //security
     query.prepare("SELECT * FROM user WHERE email = :email");
+    query.bindValue(":email", email);
 
     query.exec();
 

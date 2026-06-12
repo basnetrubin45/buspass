@@ -24,7 +24,10 @@ set(PROJECT_SOURCES
         mainwindow.ui
         mainwindow.h
         mainwindow.cpp
-)
+        review.cpp
+        review.h
+        review.ui
+    )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 

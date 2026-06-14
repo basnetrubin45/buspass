@@ -3,7 +3,7 @@
 #include "session.h"
 #include "ui_login.h"
 #include "mainwindow.h"
-#include"database.h"
+
 
 login::login(QWidget *parent)
     : QMainWindow(parent)

@@ -23,7 +23,7 @@ public:
                    "isAdmin BOOLEAN NOT NULL"
                    ")");
 
-        //  query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES ('admin', 'admin123', 'admin1', 'admin@example.com', 1)");
+      query.exec("INSERT INTO user (username, password, name, email, isAdmin) VALUES ('admin', 'admin123', 'admin1', 'admin@example.com', 1)");
     }
 };
 

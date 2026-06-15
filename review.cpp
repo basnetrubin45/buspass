@@ -1,4 +1,5 @@
 #include "review.h"
+#include "ui_review.h"
 #include <QLineEdit>
 #include <QComboBox>
 #include <QTextEdit>
@@ -7,9 +8,21 @@
 #include <QDialogButtonBox>
 #include <QDebug>
 
+bool review::checkReview(QString reviewtext)
+{
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM user WHERE reviewtext = :review");
+    query.bindValue(":review", reviewtext);
+    query.exec();
+
+
+    return false;
+}
+
 review::review(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::review)
+    , ui(new UI::review)
 {
     ui->setupUi(this);
     ui->titleLabel->setStyleSheet("font-size: 20px; font-weight: bold; margin-bottom: 4px;");
@@ -18,10 +31,16 @@ review::review(QWidget *parent)
 }
 void review::submitReview()
 {
-    const QString body = ui->reviewTextEdit->toPlainText().trimmed();
-    if (body.isEmpty()) {
-        setFeedback("Please fill in all fields.", true);
+    QString reviewtext = ui->reviewTextLineEdit->toPlainText().trimmed();
+    if (reviewtext.isEmpty()) {
+        setfeedback(this,"Please write a review.");
         return;
+    }
+    if (checkReview(reviewtext)) {
+        setfeedback("Success");
+    } else {
+        setfeedback("Error");
+
     }
 
     qDebug() << " Review Submitted ";
@@ -31,4 +50,8 @@ void review::resetForm()
 {
     ui->reviewTitleLineEdit->clear();
     ui->reviewTextEdit->clear();
+}
+
+void review::setfeedback(QString message){
+    ui->feedbackLabel->setText(message);
 }

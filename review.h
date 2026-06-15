@@ -7,6 +7,7 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QSqlError>
+#include <QMessageBox>
 
 class QLineEdit;
 class QComboBox;
@@ -14,6 +15,11 @@ class QTextEdit;
 class QCheckBox;
 class QLabel;
 class QDialogButtonBox;
+
+QT_BEGIN_NAMESPACE
+namespace UI{
+class review;
+}
 
 class review: public QWidget
 {
@@ -28,7 +34,7 @@ private slots:
     void resetForm();
 
 private:
-    Ui::review *ui;
+    review *ui;
 
     bool setupDatabase();
     bool checkReview(QString Reviewpost);

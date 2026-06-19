@@ -36,6 +36,8 @@ qt_add_executable(buspass
             signup.ui
             session.h
             database.h
+            add.h add.cpp add.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET buspass APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

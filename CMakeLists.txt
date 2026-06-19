@@ -30,6 +30,16 @@ set(PROJECT_SOURCES
         adminprofile.cpp
         adminprofile.h
         adminprofile.ui
+        pageswitch.h
+        adminprofile.cpp
+        adminprofile.h
+        adminprofile.ui
+        # review.cpp
+        # review.h
+        # review.ui
+        # adminprofile.cpp
+        # adminprofile.h
+        # adminprofile.ui
     )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -45,6 +55,8 @@ qt_add_executable(buspass
             add.h add.cpp add.ui
             review.h
             adminprofile.h
+           # review.h
+            pageswitch.h
 
     )
 # Define target properties for Android with Qt 6 as:

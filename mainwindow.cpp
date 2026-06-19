@@ -40,3 +40,6 @@ void MainWindow::handleBusAddition(QString id, QString route, QString seats, QSt
     ui->tableWidget->setItem(currentRow, 4, new QTableWidgetItem(departure));
     ui->tableWidget->setItem(currentRow, 5, new QTableWidgetItem(price));
 }
+
+
+

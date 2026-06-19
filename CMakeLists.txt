@@ -24,22 +24,13 @@ set(PROJECT_SOURCES
         mainwindow.ui
         mainwindow.h
         mainwindow.cpp
-        review.cpp
-        review.h
-        review.ui
-        adminprofile.cpp
-        adminprofile.h
-        adminprofile.ui
         pageswitch.h
-        adminprofile.cpp
-        adminprofile.h
-        adminprofile.ui
-        # review.cpp
-        # review.h
-        # review.ui
         # adminprofile.cpp
         # adminprofile.h
         # adminprofile.ui
+        # review.cpp
+        # review.h
+        # review.ui
     )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -53,8 +44,7 @@ qt_add_executable(buspass
             session.h
             database.h
             add.h add.cpp add.ui
-            review.h
-            adminprofile.h
+           # adminprofile.h
            # review.h
             pageswitch.h
 

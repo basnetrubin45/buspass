@@ -1,12 +1,31 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "add.h" // Makes sure MainWindow knows what the Add page is
+#include "login.h"
+#include "pageswitch.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QWidget *innerWidget = ui->centralwidget->findChild<QWidget*>();
+    if (innerWidget && innerWidget->layout()) {
+        addNavBar(innerWidget,
+                  {"Login", "Booking History", "Profile", "Review"},
+                  {
+                      [this]() { openPage<login>(this); },
+                      [this]() { openPage<login>(this); },
+                      [this]() { openPage<login>(this); },
+                      [this]() { openPage<login>(this); }
+                  });    }
+
+    addNavBar(ui->centralwidget,
+              {"Login"},
+              {
+               [this]() { openPage<login>(this); },
+               });
 }
 
 MainWindow::~MainWindow()

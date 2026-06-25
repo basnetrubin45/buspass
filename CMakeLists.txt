@@ -36,12 +36,12 @@ set(PROJECT_SOURCES
         userprofile.ui
 =======
         pageswitch.h
-        # adminprofile.cpp
-        # adminprofile.h
-        # adminprofile.ui
-        # review.cpp
-        # review.h
-        # review.ui
+        adminprofile.cpp
+        adminprofile.h
+        adminprofile.ui
+        review.cpp
+        review.h
+        review.ui
 >>>>>>> 13a2202a57f0061074db60fe6317427a1521662b
     )
 
@@ -61,8 +61,8 @@ qt_add_executable(buspass
             userprofile.ui
 =======
             add.h add.cpp add.ui
-           # adminprofile.h
-           # review.h
+            adminprofile.h
+            review.h
             pageswitch.h
 >>>>>>> 13a2202a57f0061074db60fe6317427a1521662b
 
